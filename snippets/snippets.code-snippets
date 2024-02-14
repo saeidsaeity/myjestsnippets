@@ -1,0 +1,48 @@
+{
+
+	"mutation test":{
+		"prefix": "mut"
+		"body":[
+			"test('should be different reference to input',() => {",
+				"const input = []",
+   				"expect(${1:func}(input)).not.toBe(input);",
+			"} )",
+			"test('should not mutate input',() => {",
+				"const input = ${2:[]}",
+				"const copyinput = ${2:[]}",
+				"${1:func}(input)",
+   				"expect(input).toEqual(copyinput);",
+			"} )"
+
+
+		],
+		"description":"generic mutation tests for JEST"
+	},
+	"compare test":{
+		"prefix":"comp"
+		"body":[
+			"test('should return right value',() => {",
+				"const input = ${1:[]}",
+				"const expectedoutput = ${2:[]}",
+				"const output = ${3:func}(input)",
+				"expect(output).toEqual(expectedoutput)",
+				"})"
+					],
+		"description": "generic comparison test for JEST"
+
+	},
+	"type test":{
+		"prefix": "typetest"
+		"body":[
+			"test('should return right type',() => {",
+			"const input = []",
+	
+			"expect (${1|typeof func(input),Array.isArray(func(input))|} ).toBe(${2|'object','string','number','boolean','undefined','null',true|})",
+			"})"
+			],
+		"description": "generic type test"
+	}
+
+	
+	
+}
