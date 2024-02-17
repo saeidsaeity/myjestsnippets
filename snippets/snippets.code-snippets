@@ -41,7 +41,131 @@
 			"})"
 			],
 		"description": "generic type test"
+	},
+	"post test":{
+		"prefix": "posttest"
+		"body":[
+			"test('POST ${2}',() => {",
+			"const data = ${1:{}}"
+			"return request(app)",
+			".post('${3}')"
+			".send(data)",
+			".expect(201)",
+			".then(response => {})"
+			"})"
+			]
+	},
+	"get test":{
+		"prefix": "gettest"
+		"body":[
+			"test('GET ${2}',() => {",
+			"return request(app)",
+			".get('${1}')"
+			".expect(200)",
+			".then(response => {})",
+			"})"
+			]
+	},
+	"patch test": {
+		"prefix": "patchtest"
+		"body":[
+			"test('PATCH ${2}',() => {",
+			"const ${1:updateddata} = {}"
+			"return request(app)",
+			".patch('${3}')",
+			".send(updateddata)"
+			".expect(200)",
+			".then(response => {})",
+			"})"
+		]
+	},
+	"delete test":{
+		"prefix": "deletetest"
+		"body":[
+			"test('DELETE ${2}',() => {",
+			"return request(app)",
+			".delete('${1}')"
+			".expect(204)",
+			"})"
+			]
+	},
+	"setup jest":{
+		"prefix": "setupjest"
+		"body":
+		[
+			"const ${1} = require('${6}')",
+			"describe('    ', () => {",
+			"test('should return right type',() => {",
+			"const input = []",
+	
+			"expect (${2|typeof func(input),Array.isArray(func(input))|} ).toBe(${3|'object','string','number','boolean','undefined','null',true|})",
+			"})",
+			"test('should be different reference to input',() => {",
+				"const input = []",
+   				"expect(${1}(input)).not.toBe(input);",
+			"} )",
+			"test('should not mutate input',() => {",
+				"const input = ${4:[]}",
+				"const copyinput = ${4:[]}",
+				"${1}(input)",
+   				"expect(input).toEqual(copyinput);",
+			"} )",
+			"test('should return right value',() => {",
+				"const input = ${4:[]}",
+				"const expectedoutput = ${5:[]}",
+				"const output = ${1}(input)",
+				"expect(output).toEqual(expectedoutput)",
+				"})",
+				"})"
+			]
+
+	},
+	"async get test":{
+		"prefix": "agettest"
+		"body":
+		[
+			"test('gets 200', async () => {",
+			"const { body } = await request(app).get('${1}').expect(200);"
+			"})"
+
+		]
+	},
+	"async post test":{
+		"prefix": "aposttest",
+		"body": [
+			"test('POST 201', async () => {",
+			"const data = {}",
+		"const { body } = await request(app).post('${1}').send(data).expect(201);",
+		"})"
+		]
+
+
+	},
+	"async patch test":{
+		"prefix": "apatchtest",
+		"body": [
+			"test('Patch 200', async () => {",
+			"const data = {}",
+		"const { body } = await request(app).patch('${1}').send(data).expect(200);",
+		"})"
+		]
+
+
+	},
+	"async delete test":{
+		"prefix": "adeletetest",
+		"body": [
+			"test('Delete 200', async () => {",
+			"const data = {}",
+		" await request(app).delete('${1}').expect(200);",
+		"})"
+		]
+
+
+
 	}
+
+
 
 	
 	

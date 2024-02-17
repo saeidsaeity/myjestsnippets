@@ -1,65 +1,43 @@
-# basic-jest-test-snippets README
+# Snippet Extension README
 
-This is the README for your extension "basic-jest-test-snippets". After writing up a brief description, we recommend including the following sections.
+## Description
+This Visual Studio Code extension provides several useful code snippets to enhance your development workflow. It includes snippets for common testing scenarios in JavaScript.
 
-## Features
+## Installation
+To install this extension, follow these steps:
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+1. Open Visual Studio Code.
+2. Go to the Extensions view by clicking on the square icon in the sidebar or pressing `Ctrl+Shift+X`.
+3. Search for "Snippet Extension" in the Extensions Marketplace.
+4. Click on the Install button.
 
-For example if there is an image subfolder under your extension project workspace:
+## Usage
+Once installed, you can use the snippets by typing their trigger keywords in a JavaScript file and pressing `Tab` to insert the snippet.
 
-\!\[feature X\]\(images/feature-x.png\)
+### Available Snippets
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+#### `mut`
+This snippet provides test cases for testing mutable functions. It includes two test cases:
+- Test whether the function returns a different reference to the input array.
+- Test whether the function does not mutate the input array.
 
-## Requirements
+#### `comp`
+This snippet provides a test case for testing the return value of a function.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+#### `typetest`
+This snippet provides a test case for testing the return type of a function.
 
-## Extension Settings
+## Example
+```javascript
+// Type `mut` and press `Tab` to insert the snippet
+test('should be different reference to input', () => {
+  const input = [];
+  expect(func(input)).not.toBe(input);
+});
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+test('should not mutate input', () => {
+  const input = [];
+  const copyinput = [];
+  func(input);
+  expect(input).toEqual(copyinput);
+});
